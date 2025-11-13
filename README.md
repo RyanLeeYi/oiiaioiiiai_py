@@ -1,4 +1,4 @@
-# Desktop oiiaioiiiai cat Application / 桌面寵物應用程式
+# Desktop oiiaioiiiai Spinning Cat Application / 桌面 51121
 
 <img width="300" height="400" alt="OIIAIOIIIAI_stop" src="https://github.com/user-attachments/assets/73b92e7c-f213-4585-b766-783d56ba4977" />
 
