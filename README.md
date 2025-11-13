@@ -1,4 +1,4 @@
-# Desktop oiiaioiiiai Spinning Cat Application / 桌面 51121
+# Desktop OIIAIOIIIAI Spinning Cat Application / 桌面旋轉貓咪應用程式 51121!!
 
 <img width="300" height="400" alt="OIIAIOIIIAI_stop" src="https://github.com/user-attachments/assets/73b92e7c-f213-4585-b766-783d56ba4977" />
 
@@ -47,7 +47,7 @@ pip install PyQt5 pygame
 Place your files in the `Images/` folder:
 - `OIIAIOIIIAI.gif` - Animated GIF (for active state)
 - `OIIAIOIIIAI_stop.png` - Static PNG (for idle state)
-- `music.mp3` - Background music (supports MP3, OGG, WAV)
+- `oiia-oiia-sound.mp3` - Background music (supports MP3, OGG, WAV)
 
 Recommended image size: 180x180 pixels or smaller
 
@@ -96,7 +96,7 @@ project_root/
 ├── Images/                  # Resource folder
 │   ├── OIIAIOIIIAI.gif     # Animated pet image
 │   ├── OIIAIOIIIAI_stop.png # Static pet image
-│   ├── music.mp3           # Background music
+│   ├── oiia-oiia-sound.mp3 # Background music
 │   └── README.txt          # Image folder instructions
 └── README.md               # This file
 ```
@@ -104,7 +104,7 @@ project_root/
 ### Troubleshooting
 
 **Music not playing:**
-- Ensure `music.mp3` exists in `Images/` folder
+- Ensure `oiia-oiia-sound.mp3` exists in `Images/` folder
 - Check mute is not enabled (right-click → uncheck Mute)
 - Verify file format is supported (MP3, OGG, WAV)
 
@@ -155,7 +155,7 @@ pip install PyQt5 pygame
 將以下檔案放入 `Images/` 資料夾：
 - `OIIAIOIIIAI.gif` - 動畫 GIF（活躍狀態）
 - `OIIAIOIIIAI_stop.png` - 靜態 PNG（閒置狀態）
-- `music.mp3` - 背景音樂（支援 MP3、OGG、WAV 格式）
+- `oiia-oiia-sound.mp3` - 背景音樂（支援 MP3、OGG、WAV 格式）
 
 建議圖片大小：180x180 像素或更小
 
@@ -204,7 +204,7 @@ pyinstaller oiiaioiiiai.spec
 ├── Images/                  # 資源資料夾
 │   ├── OIIAIOIIIAI.gif     # 動畫寵物圖片
 │   ├── OIIAIOIIIAI_stop.png # 靜態寵物圖片
-│   ├── music.mp3           # 背景音樂
+│   ├── oiia-oiia-sound.mp3 # 背景音樂
 │   └── README.txt          # 資料夾說明
 └── README.md               # 本說明檔
 ```
@@ -212,7 +212,7 @@ pyinstaller oiiaioiiiai.spec
 ### 疑難排解
 
 **音樂無法播放：**
-- 確認 `music.mp3` 檔案存在於 `Images/` 資料夾中
+- 確認 `oiia-oiia-sound.mp3` 檔案存在於 `Images/` 資料夾中
 - 檢查是否已啟用靜音（右鍵 → 取消勾選「靜音」）
 - 確認檔案格式受支援（MP3、OGG、WAV）
 
