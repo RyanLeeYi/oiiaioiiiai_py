@@ -1,6 +1,6 @@
 # Desktop oiiaioiiiai cat Application / 桌面寵物應用程式
 
-<img width="100" height="200" alt="OIIAIOIIIAI_stop" src="https://github.com/user-attachments/assets/73b92e7c-f213-4585-b766-783d56ba4977" />
+<img width="300" height="400" alt="OIIAIOIIIAI_stop" src="https://github.com/user-attachments/assets/73b92e7c-f213-4585-b766-783d56ba4977" />
 
 [English](#english) | [中文](#中文)
 
