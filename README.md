@@ -15,9 +15,15 @@ A cute, transparent desktop pet that lives on your screen! This Python applicati
 - **Transparent Window**: Only the pet image is visible, no borders or background
 - **Always On Top**: Pet stays visible above all other windows
 - **Draggable**: Click and drag your pet anywhere on the screen
-- **Animated & Static States**: Switch between animated GIF and static PNG images
-- **Background Music**: Plays music when showing GIF animation
+- **Two Independent Groups**: Each group has its own GIF, PNG, background music, and auto-switch timings
+  - Group 1: GIF1 (2s) + PNG1 (1s) + Music1
+  - Group 2: GIF2 (3s) + PNG2 (1.5s) + Music2
+- **Flexible Switching**: Toggle between GIF/PNG within each group, or switch between groups
+- **Group-Specific Music**: Different background music for each group's GIF animation
+- **Independent Timings**: Each state (GIF/PNG) in each group has its own display duration
+  - Customizable durations for GIF and PNG separately in each group
 - **Mute Option**: Toggle sound on/off via context menu
+- **Zoom Controls**: Resize the pet from 50% to 300% of original size
 - **Auto-Switch Mode**: Automatically alternates between states every 3 seconds (enabled by default)
 - **Manual Controls**: Use middle-click or context menu to toggle states
 - **PyInstaller Ready**: Can be packaged into standalone executable
@@ -45,9 +51,18 @@ pip install PyQt5 pygame
 ### Setup
 
 Place your files in the `Images/` folder:
-- `OIIAIOIIIAI.gif` - Animated GIF (for active state)
-- `OIIAIOIIIAI_stop.png` - Static PNG (for idle state)
-- `oiia-oiia-sound.mp3` - Background music (supports MP3, OGG, WAV)
+
+**Group 1:**
+- `OIIAIOIIIAI.gif` - Group 1 animated GIF
+- `OIIAIOIIIAI_stop.png` - Group 1 static PNG
+- `oiia-oiia-sound.mp3` - Group 1 background music
+
+**Group 2:**
+- `OIIAIOIIIAI2.gif` - Group 2 animated GIF
+- `OIIAIOIIIAI2_stop.png` - Group 2 static PNG
+- `oiia-oiia-sound2.mp3` - Group 2 background music
+
+Supported music formats: MP3, OGG, WAV
 
 Recommended image size: 180x180 pixels or smaller
 
@@ -64,25 +79,55 @@ pyinstaller oiiaioiiiai.spec
 ```
 The executable will be in `dist/oiiaioiiiai.exe`
 
+### Customizing Display Timings
+
+You can customize how long each state displays by editing the timing variables in `oiiaioiiiai.py`:
+
+```python
+# Group 1 timings (in milliseconds)
+self.group1_gif_duration = 2000   # 2 seconds for group 1 GIF
+self.group1_png_duration = 1000   # 1 second for group 1 PNG
+
+# Group 2 timings (in milliseconds)
+self.group2_gif_duration = 3000   # 3 seconds for group 2 GIF
+self.group2_png_duration = 1500   # 1.5 seconds for group 2 PNG
+```
+
+For example, to make Group 1 GIF display for 5 seconds, change:
+```python
+self.group1_gif_duration = 5000
+```
+
 ### Controls
 
 | Action | Description |
 |--------|-------------|
 | **Left Click + Drag** | Move the pet around your screen |
-| **Middle Click** | Manually toggle between animated and static states |
+| **Middle Click** | Toggle between GIF and PNG within current group |
 | **Right Click** | Open context menu |
 
 ### Context Menu Options
 
-- **切換狀態 (Toggle State)**: Manually switch between GIF and PNG
-- **自動切換模式 (Auto Switch Mode)**: Enable/disable automatic switching
+- **切換狀態 (Toggle State)**: Toggle between GIF and PNG within current group
+- **組 1 (Group 1)**:
+  - **顯示 GIF 1**: Display Group 1 animated GIF (with Music 1)
+  - **顯示 PNG 1**: Display Group 1 static PNG
+- **組 2 (Group 2)**:
+  - **顯示 GIF 2**: Display Group 2 animated GIF (with Music 2)
+  - **顯示 PNG 2**: Display Group 2 static PNG
+- **自動切換模式 (Auto Switch Mode)**: Enable/disable automatic switching (toggles GIF/PNG within current group)
 - **靜音 (Mute)**: Toggle music on/off
+- **放大 (Zoom In)**: Increase size by 25% (up to 300%)
+- **縮小 (Zoom Out)**: Decrease size by 25% (down to 50%)
+- **重設大小 (Reset Zoom)**: Reset to original size (100%)
 - **退出 (Exit)**: Close the application
 
 ### Music Behavior
 
-- Music plays automatically when GIF animation is displayed
-- Music stops when switching to static PNG
+- Each group has its own unique background music
+- Music plays automatically when displaying a group's GIF animation
+- Music stops when switching to PNG (within the same group)
+- When switching between groups, the appropriate music loads and plays
 - Music loops indefinitely while GIF is showing
 - Can be muted via context menu (mute state persists across toggles)
 
@@ -94,9 +139,12 @@ project_root/
 ├── oiiaioiiiai.spec         # PyInstaller spec file
 ├── requirements.txt         # Python dependencies
 ├── Images/                  # Resource folder
-│   ├── OIIAIOIIIAI.gif     # Animated pet image
-│   ├── OIIAIOIIIAI_stop.png # Static pet image
-│   ├── oiia-oiia-sound.mp3 # Background music
+│   ├── OIIAIOIIIAI.gif     # Group 1 animated GIF
+│   ├── OIIAIOIIIAI_stop.png # Group 1 static PNG
+│   ├── oiia-oiia-sound.mp3 # Group 1 background music
+│   ├── OIIAIOIIIAI2.gif    # Group 2 animated GIF
+│   ├── OIIAIOIIIAI2_stop.png # Group 2 static PNG
+│   ├── oiia-oiia-sound2.mp3 # Group 2 background music
 │   └── README.txt          # Image folder instructions
 └── README.md               # This file
 ```
@@ -123,9 +171,15 @@ project_root/
 - **透明視窗**：只顯示寵物圖片，無邊框或背景
 - **永遠置頂**：寵物始終顯示在所有視窗之上
 - **可拖曳**：點擊並拖曳寵物到螢幕任意位置
-- **動畫與靜態切換**：在 GIF 動畫和 PNG 靜態圖片之間切換
-- **背景音樂**：顯示 GIF 動畫時播放音樂
+- **兩個獨立組別**：每組都有各自的 GIF、PNG、背景音樂和顯示時間
+  - 組 1：GIF1 (2秒) + PNG1 (1秒) + 音樂1
+  - 組 2：GIF2 (3秒) + PNG2 (1.5秒) + 音樂2
+- **靈活切換**：可在各組內切換 GIF/PNG，或在組之間切換
+- **分組專屬音樂**：每組的 GIF 動畫播放不同的背景音樂
+- **獨立計時**：每組的每個狀態（GIF/PNG）都有各自的顯示時間
+  - 可分別自訂每組的 GIF 和 PNG 顯示時長
 - **靜音選項**：透過右鍵選單切換音效開關
+- **縮放控制**：可將寵物大小調整為原始大小的 50% 至 300%
 - **自動切換模式**：每 3 秒自動在狀態間切換（預設啟用）
 - **手動控制**：使用中鍵或右鍵選單切換狀態
 - **支援打包**：可使用 PyInstaller 打包成獨立執行檔
@@ -153,9 +207,18 @@ pip install PyQt5 pygame
 ### 設定
 
 將以下檔案放入 `Images/` 資料夾：
-- `OIIAIOIIIAI.gif` - 動畫 GIF（活躍狀態）
-- `OIIAIOIIIAI_stop.png` - 靜態 PNG（閒置狀態）
-- `oiia-oiia-sound.mp3` - 背景音樂（支援 MP3、OGG、WAV 格式）
+
+**組 1：**
+- `OIIAIOIIIAI.gif` - 組 1 動畫 GIF
+- `OIIAIOIIIAI_stop.png` - 組 1 靜態 PNG
+- `oiia-oiia-sound.mp3` - 組 1 背景音樂
+
+**組 2：**
+- `OIIAIOIIIAI2.gif` - 組 2 動畫 GIF
+- `OIIAIOIIIAI2_stop.png` - 組 2 靜態 PNG
+- `oiia-oiia-sound2.mp3` - 組 2 背景音樂
+
+支援的音樂格式：MP3、OGG、WAV
 
 建議圖片大小：180x180 像素或更小
 
@@ -172,25 +235,55 @@ pyinstaller oiiaioiiiai.spec
 ```
 執行檔將位於 `dist/oiiaioiiiai.exe`
 
+### 自訂顯示時間
+
+您可以透過編輯 `oiiaioiiiai.py` 中的時間變數來自訂每個狀態的顯示時長：
+
+```python
+# 組 1 時間設定（以毫秒為單位）
+self.group1_gif_duration = 2000   # 組 1 GIF 顯示 2 秒
+self.group1_png_duration = 1000   # 組 1 PNG 顯示 1 秒
+
+# 組 2 時間設定（以毫秒為單位）
+self.group2_gif_duration = 3000   # 組 2 GIF 顯示 3 秒
+self.group2_png_duration = 1500   # 組 2 PNG 顯示 1.5 秒
+```
+
+例如，要讓組 1 的 GIF 顯示 5 秒，修改為：
+```python
+self.group1_gif_duration = 5000
+```
+
 ### 操作控制
 
 | 動作 | 說明 |
 |-----|------|
 | **左鍵拖曳** | 移動寵物到螢幕任意位置 |
-| **中鍵點擊** | 手動切換動畫和靜態狀態 |
+| **中鍵點擊** | 在當前組內切換 GIF 和 PNG |
 | **右鍵點擊** | 開啟右鍵選單 |
 
 ### 右鍵選單選項
 
-- **切換狀態**：手動在 GIF 和 PNG 之間切換
-- **自動切換模式**：啟用/停用自動切換功能
+- **切換狀態**：在當前組內切換 GIF 和 PNG
+- **組 1**：
+  - **顯示 GIF 1**：顯示組 1 動畫 GIF（搭配音樂1）
+  - **顯示 PNG 1**：顯示組 1 靜態 PNG
+- **組 2**：
+  - **顯示 GIF 2**：顯示組 2 動畫 GIF（搭配音樂2）
+  - **顯示 PNG 2**：顯示組 2 靜態 PNG
+- **自動切換模式**：啟用/停用自動切換（在當前組內切換 GIF/PNG）
 - **靜音**：切換音樂開關
+- **放大**：每次增加 25% 大小（最大 300%）
+- **縮小**：每次減少 25% 大小（最小 50%）
+- **重設大小**：恢復為原始大小（100%）
 - **退出**：關閉應用程式
 
 ### 音樂行為
 
-- 顯示 GIF 動畫時自動播放音樂
-- 切換到靜態 PNG 時停止音樂
+- 每組都有各自獨特的背景音樂
+- 顯示組別的 GIF 動畫時自動播放該組音樂
+- 在同一組內切換到 PNG 時停止音樂
+- 在組之間切換時，會載入並播放對應的音樂
 - GIF 顯示期間音樂會無限循環播放
 - 可透過右鍵選單靜音（靜音狀態在切換時保持）
 
@@ -202,9 +295,12 @@ pyinstaller oiiaioiiiai.spec
 ├── oiiaioiiiai.spec         # PyInstaller 設定檔
 ├── requirements.txt         # Python 相依套件
 ├── Images/                  # 資源資料夾
-│   ├── OIIAIOIIIAI.gif     # 動畫寵物圖片
-│   ├── OIIAIOIIIAI_stop.png # 靜態寵物圖片
-│   ├── oiia-oiia-sound.mp3 # 背景音樂
+│   ├── OIIAIOIIIAI.gif     # 組 1 動畫 GIF
+│   ├── OIIAIOIIIAI_stop.png # 組 1 靜態 PNG
+│   ├── oiia-oiia-sound.mp3 # 組 1 背景音樂
+│   ├── OIIAIOIIIAI2.gif    # 組 2 動畫 GIF
+│   ├── OIIAIOIIIAI2_stop.png # 組 2 靜態 PNG
+│   ├── oiia-oiia-sound2.mp3 # 組 2 背景音樂
 │   └── README.txt          # 資料夾說明
 └── README.md               # 本說明檔
 ```
